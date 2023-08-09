@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: checkout submodules
-      run: git submodules update --init
+      run: git submodule update --init
           
     - name: configure cmake build
       run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 16 2019"
