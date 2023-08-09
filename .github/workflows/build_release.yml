@@ -17,7 +17,7 @@ jobs:
       run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 17 2022"
 
     - name: make
-      run: cmake --build .\ --config Release
+      run: cd cmake/build && cmake --build .\ --config Release
 
     - name: create zip archive
       run: 7z a grpc-release.zip .\Release\*
