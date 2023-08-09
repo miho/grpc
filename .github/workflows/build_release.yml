@@ -1,1 +1,34 @@
+name: build-release
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: checkout submodules
+      run: git submodules update --init
+          
+    - name: configure cmake build
+      run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 16 2019"
+
+    - name: make
+      run: cmake --build . --config Release
+
+    - name: create zip archive
+      run: 7z a grpc-release.zip .\Release\*
+
+    - uses: AButler/upload-release-assets@v2.0
+      with:
+          files: './release.zip'
+          release-tag: SNAPSHOT 
+          repo-token: ${{ secrets.GITHUB_TOKEN }}    
 
