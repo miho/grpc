@@ -24,7 +24,7 @@ jobs:
 
     - uses: AButler/upload-release-assets@v2.0
       with:
-          files: './release.zip'
+          files: './cmake/build/grpc-release.zip'
           release-tag: SNAPSHOT 
           repo-token: ${{ secrets.GITHUB_TOKEN }}    
 
