@@ -20,7 +20,7 @@ jobs:
       run: cd cmake/build && cmake --build .\ --config Release
 
     - name: create zip archive
-      run: cd cmake/build && 7z a grpc-release.zip .\Release\* && mv grpc-release.zip grpc-release-$(date +"%Y-%m-%d_%H-%M-%S").zip
+      run: cd cmake/build && 7z a grpc-release.zip .\Release\* && mv grpc-release.zip grpc-release-SNAPSHOT-$(date +"%Y-%m-%d_%H-%M-%S").zip
 
     - uses: AButler/upload-release-assets@v2.0
       with:
