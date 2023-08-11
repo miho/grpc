@@ -20,11 +20,11 @@ jobs:
       run: cd cmake/build && cmake --build .\ --config Release
 
     - name: create zip archive
-      run: cd cmake/build && 7z a grpc-release.zip .\Release\*
+      run: cd cmake/build && 7z a grpc-release.zip .\Release\* && mv grpc-release.zip grpc-release-$(date +"%Y-%m-%d_%H-%M-%S").zip
 
     - uses: AButler/upload-release-assets@v2.0
       with:
-          files: './cmake/build/grpc-release.zip'
-          release-tag: SNAPSHOT 
+          files: 'cmake/build/grpc-release-SNAPSHOT-*.zip'
+          release-tag: SNAPSHOT
           repo-token: ${{ secrets.GITHUB_TOKEN }}    
 
