@@ -26,7 +26,7 @@ jobs:
     #  run: cd cmake/build && 7z a grpc-release.zip .\Release\* && mv grpc-release.zip grpc-release-SNAPSHOT-$(date +"%Y-%m-%d_%H-%M-%S").zip
 
     - name: fake build files
-      run: mkdir -p cmake/build && zip -r cmake/build/grpc-release-SNAPSHOT-123.zip . -x "*.git*" 
+      run: mkdir -p cmake/build && 7z a cmake/build/grpc-release-SNAPSHOT-123.zip ./README.md 
       
     - name: list
       run: ls && echo "---" && ls cmake/build/
