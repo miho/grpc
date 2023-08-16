@@ -1,6 +1,6 @@
 name: build-release
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
@@ -31,21 +31,9 @@ jobs:
     - name: list
       run: ls && echo "---" && ls cmake/build/
 
-    - name: Get release by name (Windows)
-      id: getrelease-windows
-      run: |
-        $release = Invoke-RestMethod -Uri "https://api.github.com/repos/$env:GITHUB_REPOSITORY/releases/tags/$env:RELEASE_NAME" -Headers @{Authorization="Bearer $env:GITHUB_TOKEN"}
-        echo "::set-output name=url::$($release.upload_url)"
-      env:
-        RELEASE_NAME: 'SNAPSHOT' # Replace with your release
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-
     - name: Upload Zip to Release (Windows)
-      uses: actions/upload-release-asset@v1
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        asset_path: cmake/build/grpc-release-SNAPSHOT-123.zip
-        asset_name: grpc-release-SNAPSHOT-123.zip
-        asset_content_type: application/zip
-        upload_url: ${{ steps.getrelease-windows.outputs.url }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run:
+        gh release upload SNAPSHOT cmake/build/grpc-release-SNAPSHOT-123.zip
 
