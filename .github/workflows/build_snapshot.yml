@@ -31,10 +31,15 @@ jobs:
     - name: list
       run: ls && echo "---" && ls cmake/build/
 
-    - name: TEST
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: curl -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/miho/grpc/releases
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: cmake/build/grpc-release-SNAPSHOT-123.zip
+        asset_name: mything
+        tag: SNAPSHOT
+        overwrite: true
+        body: "This is my release text"    
 
     - name: Upload Zip to Release (Windows)
       env:
