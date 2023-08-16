@@ -31,6 +31,11 @@ jobs:
     - name: list
       run: ls && echo "---" && ls cmake/build/
 
+    - name: TEST
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: curl -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/miho/grpc/releases
+
     - name: Upload Zip to Release (Windows)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
