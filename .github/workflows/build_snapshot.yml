@@ -12,21 +12,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    #- name: checkout submodules
-    #  run: git submodule update --init
+    - name: checkout submodules
+      run: git submodule update --init
           
-    #- name: configure cmake build
-    #  run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 17 2022"
+    - name: configure cmake build
+      run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 17 2022"
 
-    #- name: make
-    #  run: cd cmake/build && cmake --build .\ --config Release
+    - name: make
+      run: cd cmake/build && cmake --build .\ --config Release
 
-    #- name: create zip archive
-    #  run: cd cmake/build && 7z a grpc-release.zip .\Release\* && mv grpc-release.zip grpc-release-SNAPSHOT-$(date +"%Y-%m-%d_%H-%M-%S").zip
+    - name: create zip archive
+      run: cd cmake/build && 7z a grpc-release.zip .\Release\* && mv grpc-release.zip grpc-release-SNAPSHOT-$(date +"%Y-%m-%d_%H-%M-%S").zip
 
-    - name: fake build files
-      run: mkdir -p cmake/build && 7z a cmake/build/grpc-release-SNAPSHOT-123.zip ./README.md 
-      
     - name: list
       run: ls && echo "---" && ls cmake/build/
 
@@ -34,5 +31,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run:
-        gh release upload SNAPSHOT cmake/build/grpc-release-SNAPSHOT-123.zip
+        gh release upload SNAPSHOT cmake/build/grpc-release-SNAPSHOT-*.zip
 
