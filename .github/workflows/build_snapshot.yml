@@ -34,7 +34,7 @@ jobs:
     - name: Get release by name (Windows)
       id: getrelease-windows
       env:
-        RELEASE_NAME: 'YourReleaseName' # Replace with your release
+        RELEASE_NAME: 'SNAPSHOT' # Replace with your release
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         $release = Invoke-RestMethod -Uri "https://api.github.com/repos/$env:GITHUB_REPOSITORY/releases/tags/$env:RELEASE_NAME" -Headers @{Authorization="Bearer $env:GITHUB_TOKEN"}
