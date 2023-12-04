@@ -16,7 +16,7 @@ jobs:
       run: git submodule update --init
           
     - name: configure cmake build
-      run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 17 2022"
+      run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 17 2022" -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=./Release
 
     - name: make
       run: cd cmake/build && cmake --build .\ --config Release
