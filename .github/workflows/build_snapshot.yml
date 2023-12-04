@@ -19,7 +19,7 @@ jobs:
       run: mkdir -p cmake/build && cd cmake/build && cmake ../.. -G "Visual Studio 17 2022" -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=./Release
 
     - name: make
-      run: cd cmake/build && cmake --build .\ --config Release
+      run: cd cmake/build && cmake --build .\ --config Release && cmake --install .\
 
     - name: create zip archive
       run: cd cmake/build && 7z a grpc-release.zip .\Release\* && mv grpc-release.zip grpc-release-SNAPSHOT-$(date +"%Y-%m-%d_%H-%M-%S").zip
